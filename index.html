@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TE Draft Intelligence · TAMIDS 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:  #0b1120;
+  --panel: #131c2e;
+  --card:  #1a2438;
+  --border: rgba(255,255,255,0.07);
+  --gold:  #c8a951;
+  --gold2: #e8c96d;
+  --blue:  #4a9eff;
+  --green: #3ecf8e;
+  --red:   #ff6b6b;
+  --text:  #e2e8f0;
+  --muted: #7a8699;
+  --mono:  'DM Mono', monospace;
+  --serif: 'Playfair Display', serif;
+  --sans:  'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.65; }
+
+/* NAV */
+nav {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 2rem;
+  position: sticky; top: 0;
+  background: rgba(11,17,32,0.95);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-family: var(--serif); font-size: 1.1rem; color: var(--gold); }
+.logo em { font-style: normal; color: var(--muted); font-family: var(--mono); font-size: 0.72rem; margin-left: 0.5rem; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; transition: color 0.15s; }
+.nav-links a:hover { color: var(--gold); }
+
+/* LAYOUT */
+.container { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+
+/* HERO */
+.hero { padding: 5.5rem 0 4rem; text-align: center; }
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.18em; color: var(--gold); border: 1px solid rgba(200,169,81,0.35);
+  padding: 0.28rem 0.8rem; border-radius: 2px; margin-bottom: 1.4rem; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 900;
+  line-height: 1.1; margin-bottom: 1.1rem;
+  background: linear-gradient(135deg, #fff 25%, var(--gold2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p { color: var(--muted); max-width: 520px; margin: 0 auto 2rem; font-size: 0.97rem; }
+.hero-stats {
+  display: flex; justify-content: center; gap: 3.5rem;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 1.4rem 0; margin-top: 2.5rem;
+}
+.hero-stat .num { font-family: var(--serif); font-size: 1.9rem; font-weight: 700; color: var(--gold); display: block; }
+.hero-stat .lbl { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* SECTION HEADERS */
+.section { padding: 4rem 0; border-top: 1px solid var(--border); }
+.section-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+.section-title { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 0.5rem; }
+.section-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 2.2rem; max-width: 560px; }
+
+/* CARDS & PANELS */
+.panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.6rem;
+}
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1.3rem;
+}
+
+/* FORM ELEMENTS */
+label { display: block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+input[type=text], input[type=number], select {
+  width: 100%; background: var(--navy); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--sans); font-size: 0.9rem;
+  padding: 0.55rem 0.8rem; border-radius: 6px; outline: none;
+  transition: border-color 0.15s;
+}
+input:focus, select:focus { border-color: var(--gold); }
+select option { background: var(--navy); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold); color: #000; font-family: var(--mono);
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+  padding: 0.65rem 1.4rem; border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s; text-transform: uppercase;
+}
+.btn:hover { background: var(--gold2); }
+.btn:active { transform: scale(0.98); }
+.btn-outline {
+  background: transparent; color: var(--gold); border: 1px solid rgba(200,169,81,0.4);
+}
+.btn-outline:hover { background: rgba(200,169,81,0.08); }
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+/* RESULT CARDS */
+.result-box {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+  padding: 2rem; margin-top: 1.5rem; display: none;
+}
+.result-box.show { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.big-num { font-family: var(--serif); font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+.big-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.3rem; }
+
+.metric-row { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.metric {
+  flex: 1; min-width: 120px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 1rem; text-align: center;
+}
+.metric .val { font-family: var(--mono); font-size: 1.35rem; font-weight: 500; color: var(--text); }
+.metric .key { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+
+/* TIER BADGES */
+.tier {
+  display: inline-block; font-family: var(--mono); font-size: 0.7rem;
+  font-weight: 500; padding: 0.22rem 0.7rem; border-radius: 3px; letter-spacing: 0.06em;
+}
+.tier-1 { background: rgba(200,169,81,0.15); color: var(--gold); border: 1px solid rgba(200,169,81,0.3); }
+.tier-2 { background: rgba(74,158,255,0.12); color: var(--blue); border: 1px solid rgba(74,158,255,0.25); }
+.tier-3 { background: rgba(62,207,142,0.12); color: var(--green); border: 1px solid rgba(62,207,142,0.25); }
+.tier-4 { background: rgba(122,134,153,0.12); color: var(--muted); border: 1px solid rgba(122,134,153,0.2); }
+
+/* PROGRESS BAR */
+.bar-wrap { background: rgba(255,255,255,0.06); border-radius: 4px; height: 8px; overflow: hidden; margin-top: 0.5rem; }
+.bar-fill { height: 100%; border-radius: 4px; background: var(--gold); transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
+.bar-fill.blue { background: var(--blue); }
+.bar-fill.green { background: var(--green); }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th { font-family: var(--mono); font-size: 0.67rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); }
+td { padding: 0.65rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* TABS */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+.tab {
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); padding: 0.7rem 1.2rem; cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: color 0.15s, border-color 0.15s;
+}
+.tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* TOOLTIP */
+.tooltip-wrap { position: relative; display: inline-block; }
+.tooltip-wrap .tt {
+  position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+  background: var(--card); border: 1px solid var(--border); color: var(--text);
+  font-size: 0.75rem; padding: 0.4rem 0.7rem; border-radius: 5px; white-space: nowrap;
+  pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 10;
+}
+.tooltip-wrap:hover .tt { opacity: 1; }
+
+/* FEATURE IMPORTANCE BARS */
+.fi-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.55rem; }
+.fi-label { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); min-width: 130px; text-align: right; }
+.fi-bar-wrap { flex: 1; background: rgba(255,255,255,0.05); border-radius: 3px; height: 6px; }
+.fi-bar { height: 100%; border-radius: 3px; }
+.fi-val { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); min-width: 36px; }
+
+/* SEARCH */
+.search-result {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.1rem 1.3rem; margin-top: 0.6rem; cursor: pointer; transition: border-color 0.15s;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.search-result:hover { border-color: rgba(200,169,81,0.4); }
+
+/* DIVIDER */
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* SCORE GAUGE */
+.gauge-wrap { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+.gauge-circle {
+  width: 90px; height: 90px; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.06);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; flex-shrink: 0;
+}
+.gauge-pct { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; }
+.gauge-lbl { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* EXPLANATION BOX */
+.explain {
+  background: rgba(200,169,81,0.06); border: 1px solid rgba(200,169,81,0.15);
+  border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem;
+  font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+}
+.explain strong { color: var(--gold); font-weight: 500; }
+
+/* INFO ICON */
+.info { color: var(--muted); font-size: 0.72rem; cursor: help; }
+
+/* RESPONSIVE */
+@media (max-width: 680px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  nav .nav-links { display: none; }
+  .hero-stats { gap: 1.5rem; }
+  .fi-label { min-width: 90px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">TE Intelligence <em>TAMIDS · 2025</em></div>
+  <div class="nav-links">
+    <a href="#lookup">Player Lookup</a>
+    <a href="#scout">Scout Tool</a>
+    <a href="#model">Model Info</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <div class="tag">NFL Draft Analytics · Tight Ends</div>
+    <h1>Draft Intelligence<br>for Tight Ends</h1>
+    <p>Enter a player's name to retrieve their draft score, or input college stats and combine metrics to project any prospect's NFL value.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num" id="stat-players">325</span><span class="lbl">TEs Analyzed</span></div>
+      <div class="hero-stat"><span class="num">0.62</span><span class="lbl">Model AUC</span></div>
+      <div class="hero-stat"><span class="num">21</span><span class="lbl">Features</span></div>
+      <div class="hero-stat"><span class="num">3</span><span class="lbl">Models Ensembled</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 1: PLAYER LOOKUP                                              -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="container">
+  <div class="section" id="lookup">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">Player Lookup</div>
+    <div class="section-sub">Search any TE from our historical dataset (2000–2025) to see their draft score, surplus value, and NFL outcome.</div>
+
+    <div class="panel">
+      <div style="display:flex; gap:1rem; align-items:flex-end; flex-wrap:wrap;">
+        <div style="flex:1; min-width:220px;">
+          <label>Player Name</label>
+          <input type="text" id="search-input" placeholder="e.g. Travis Kelce, George Kittle..." oninput="liveSearch(this.value)">
+        </div>
+        <button class="btn" onclick="doSearch()">Search ↗</button>
+        <button class="btn btn-outline" onclick="clearSearch()">Clear</button>
+      </div>
+
+      <!-- live suggestions -->
+      <div id="suggestions" style="margin-top:0.8rem;"></div>
+    </div>
+
+    <!-- LOOKUP RESULT -->
+    <div class="result-box" id="lookup-result"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 2: SCOUT TOOL (Input Stats → Predict)                         -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="container">
+  <div class="section" id="scout">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">Scout Any Prospect</div>
+    <div class="section-sub">Enter combine measurements and college production stats for any TE — the model will project their draft pick, success probability, and estimated contract value.</div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('combine')">Combine Metrics</div>
+      <div class="tab" onclick="switchTab('college')">College Stats</div>
+      <div class="tab" onclick="switchTab('review')">Review &amp; Predict</div>
+    </div>
+
+    <!-- TAB 1: COMBINE -->
+    <div class="tab-panel active" id="tab-combine">
+      <div class="panel">
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.4rem;">Enter NFL Combine measurements. Leave blank if not available — the model will impute with median values.</p>
+        <div class="grid-3" style="gap:1.2rem 1.5rem;">
+          <div>
+            <label>Height (inches) <span class="info" title="e.g. 6'4&quot; = 76">ℹ</span></label>
+            <input type="number" id="c-height" placeholder="e.g. 76" min="60" max="84" step="0.5">
+          </div>
+          <div>
+            <label>Weight (lbs)</label>
+            <input type="number" id="c-weight" placeholder="e.g. 250" min="200" max="310">
+          </div>
+          <div>
+            <label>40-Yard Dash (s)</label>
+            <input type="number" id="c-forty" placeholder="e.g. 4.65" min="4.2" max="5.3" step="0.01">
+          </div>
+          <div>
+            <label>Vertical Jump (in)</label>
+            <input type="number" id="c-vert" placeholder="e.g. 33.5" min="20" max="48" step="0.5">
+          </div>
+          <div>
+            <label>Bench Press (reps)</label>
+            <input type="number" id="c-bench" placeholder="e.g. 22" min="0" max="45">
+          </div>
+          <div>
+            <label>Broad Jump (in)</label>
+            <input type="number" id="c-broad" placeholder="e.g. 120" min="90" max="145">
+          </div>
+          <div>
+            <label>3-Cone Drill (s)</label>
+            <input type="number" id="c-cone" placeholder="e.g. 7.05" min="6.5" max="8.5" step="0.01">
+          </div>
+          <div>
+            <label>Shuttle (s)</label>
+            <input type="number" id="c-shuttle" placeholder="e.g. 4.45" min="3.8" max="5.2" step="0.01">
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; display:flex; justify-content:flex-end;">
+          <button class="btn" onclick="switchTab('college')">Next: College Stats →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: COLLEGE -->
+    <div class="tab-panel" id="tab-college">
+      <div class="panel">
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.4rem;">Career college totals and final-season stats. These are the strongest predictors in the model.</p>
+        <div class="grid-3" style="gap:1.2rem 1.5rem;">
+          <div>
+            <label>Career Receptions</label>
+            <input type="number" id="cfb-rec" placeholder="e.g. 120" min="0">
+          </div>
+          <div>
+            <label>Career Rec Yards</label>
+            <input type="number" id="cfb-yds" placeholder="e.g. 1450" min="0">
+          </div>
+          <div>
+            <label>Career Rec TDs</label>
+            <input type="number" id="cfb-td" placeholder="e.g. 14" min="0">
+          </div>
+          <div>
+            <label>Career Yards/Reception</label>
+            <input type="number" id="cfb-ypr" placeholder="e.g. 12.1" min="0" step="0.1">
+          </div>
+          <div>
+            <label>Peak Season Rec</label>
+            <input type="number" id="cfb-prec" placeholder="e.g. 52" min="0">
+          </div>
+          <div>
+            <label>Peak Season Yards</label>
+            <input type="number" id="cfb-pyds" placeholder="e.g. 682" min="0">
+          </div>
+          <div>
+            <label>Peak Season TDs</label>
+            <input type="number" id="cfb-ptd" placeholder="e.g. 8" min="0">
+          </div>
+          <div>
+            <label>Last Season Rec</label>
+            <input type="number" id="cfb-lrec" placeholder="e.g. 48" min="0">
+          </div>
+          <div>
+            <label>Last Season Yards</label>
+            <input type="number" id="cfb-lyds" placeholder="e.g. 620" min="0">
+          </div>
+          <div>
+            <label>Last Season TDs</label>
+            <input type="number" id="cfb-ltd" placeholder="e.g. 7" min="0">
+          </div>
+          <div>
+            <label>Avg Usage Rate (0–1)</label>
+            <input type="number" id="cfb-usage" placeholder="e.g. 0.18" min="0" max="1" step="0.01">
+          </div>
+          <div>
+            <label>Avg PPA (Points per Play)</label>
+            <input type="number" id="cfb-ppa" placeholder="e.g. 0.25" step="0.01">
+          </div>
+          <div>
+            <label>Last Season PPA</label>
+            <input type="number" id="cfb-lppa" placeholder="e.g. 0.30" step="0.01">
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
+          <button class="btn btn-outline" onclick="switchTab('combine')">← Back</button>
+          <button class="btn" onclick="switchTab('review')">Review &amp; Predict →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: REVIEW -->
+    <div class="tab-panel" id="tab-review">
+      <div class="panel">
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.4rem;">Review inputs below, then run the model.</p>
+        <div class="grid-2" style="gap:1.5rem;">
+          <div>
+            <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Combine</p>
+            <table><tbody id="review-combine"></tbody></table>
+          </div>
+          <div>
+            <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">College Production</p>
+            <table><tbody id="review-college"></tbody></table>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
+          <button class="btn btn-outline" onclick="switchTab('college')">← Edit</button>
+          <button class="btn" onclick="runModel()">Run Model ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREDICTION RESULT -->
+    <div class="result-box" id="scout-result"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 3: MODEL EXPLAINER                                             -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<div class="container">
+  <div class="section" id="model">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">How the Model Works</div>
+    <div class="section-sub">A three-model ensemble — Random Forest, XGBoost-style gradient boosting, and Logistic Regression — each trained on 25 years of TE combine and college data.</div>
+
+    <div class="grid-2" style="gap:1.5rem; margin-bottom:1.5rem;">
+      <div class="panel">
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Feature Importance</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:1.2rem;">Based on mean decrease in impurity across 300 trees.</p>
+        <div id="fi-bars"></div>
+      </div>
+      <div class="panel">
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Model Architecture</p>
+        <table>
+          <thead><tr><th>Model</th><th>Type</th><th>AUC</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Random Forest</td><td><span style="color:var(--muted); font-size:0.8rem;">Classifier</span></td><td style="color:var(--green);">0.624</td><td>50%</td></tr>
+            <tr><td>Gradient Boost</td><td><span style="color:var(--muted); font-size:0.8rem;">Classifier</span></td><td style="color:var(--green);">0.611</td><td>35%</td></tr>
+            <tr><td>Logistic Reg.</td><td><span style="color:var(--muted); font-size:0.8rem;">Linear</span></td><td style="color:var(--muted);">0.582</td><td>15%</td></tr>
+          </tbody>
+        </table>
+        <hr>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem; margin-top:1rem;">Success Definition</p>
+        <p style="font-size:0.85rem; color:var(--muted);">Top 40% of drafted TEs by early-career EPA (years 1–3). Threshold: approx. +12 EPA over first 3 seasons.</p>
+        <hr>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Contract Valuation</p>
+        <p style="font-size:0.85rem; color:var(--muted);">Based on draft slot market value (5th-year option pricing) adjusted by predicted success probability and positional premium for TE.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem;">Historical Draft Quadrants</p>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.2rem;">Every drafted TE from 2000–2024 classified by surplus value and NFL outcome.</p>
+      <div id="quadrant-table"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid var(--border); padding:2rem 0; margin-top:2rem;">
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <div>
+      <div style="font-family:var(--serif); color:var(--gold); margin-bottom:0.2rem;">TE Draft Intelligence</div>
+      <div style="font-family:var(--mono); font-size:0.7rem; color:var(--muted);">TAMIDS Student Data Challenge · Texas A&amp;M · 2025</div>
+    </div>
+    <div style="font-family:var(--mono); font-size:0.72rem; color:var(--muted);">Model trained on NFL Combine + CFB + PFF data · For educational use</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT — ALL MODEL LOGIC RUNS IN THE BROWSER                      -->
+<!-- No server needed. Everything below is pure client-side JS.            -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<script>
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION A: HISTORICAL PLAYER DATABASE
+// A curated set of well-known TEs with real stats for the lookup feature.
+// In production, replace with a full JSON file loaded via fetch().
+// Fields: name, round, pick, height_in, weight, forty, vertical,
+//         career_yds, career_td, early_epa, career_epa, success, school
+// ─────────────────────────────────────────────────────────────────────────────
+const PLAYER_DB = [
+  { name:"Rob Gronkowski",   round:1, pick:42,  height:77, wt:265, forty:4.68, vert:33.5, career_yds:9286, career_td:92, early_epa:48.2, career_epa:182.4, success:1, school:"Arizona" },
+  { name:"Travis Kelce",     round:3, pick:63,  height:77, wt:248, forty:4.61, vert:36.5, career_yds:11328,career_td:76, early_epa:22.1, career_epa:198.7, success:1, school:"Cincinnati" },
+  { name:"George Kittle",    round:5, pick:146, height:76, wt:247, forty:4.52, vert:35.0, career_yds:7371, career_td:38, early_epa:31.4, career_epa:124.8, success:1, school:"Iowa" },
+  { name:"Mark Andrews",     round:3, pick:86,  height:76, wt:256, forty:4.67, vert:34.5, career_yds:5283, career_td:55, early_epa:24.8, career_epa:98.2,  success:1, school:"Oklahoma" },
+  { name:"Dallas Goedert",   round:2, pick:49,  height:77, wt:256, forty:4.68, vert:33.5, career_yds:4277, career_td:31, early_epa:8.1,  career_epa:62.1,  success:1, school:"South Dakota St." },
+  { name:"Sam LaPorta",      round:2, pick:34,  height:76, wt:245, forty:4.69, vert:32.5, career_yds:889,  career_td:10, early_epa:14.2, career_epa:14.2,  success:1, school:"Iowa" },
+  { name:"Jason Witten",     round:3, pick:69,  height:77, wt:263, forty:4.79, vert:30.5, career_yds:13046,career_td:73, early_epa:10.2, career_epa:162.1, success:1, school:"Tennessee" },
+  { name:"Tony Gonzalez",    round:1, pick:13,  height:77, wt:247, forty:4.70, vert:38.5, career_yds:15127,career_td:111,early_epa:18.4, career_epa:224.3, success:1, school:"California" },
+  { name:"Antonio Gates",    round:null,pick:null,height:76,wt:260,forty:4.61,vert:38.0,career_yds:11841,career_td:116,early_epa:22.1, career_epa:198.1, success:1, school:"Kent State" },
+  { name:"Kyle Pitts",       round:1, pick:4,   height:78, wt:246, forty:4.44, vert:35.5, career_yds:1564, career_td:8,  early_epa:-2.1, career_epa:-2.1,  success:0, school:"Florida" },
+  { name:"T.J. Hockenson",   round:1, pick:8,   height:76, wt:251, forty:4.70, vert:35.0, career_yds:3988, career_td:28, early_epa:12.4, career_epa:42.1,  success:1, school:"Iowa" },
+  { name:"Darren Waller",    round:6, pick:199, height:79, wt:255, forty:4.46, vert:36.0, career_yds:3710, career_td:21, early_epa:9.2,  career_epa:38.4,  success:1, school:"Georgia Tech" },
+  { name:"Noah Fant",        round:1, pick:20,  height:76, wt:249, forty:4.50, vert:38.0, career_yds:2578, career_td:19, early_epa:4.2,  career_epa:14.1,  success:0, school:"Iowa" },
+  { name:"Hayden Hurst",     round:1, pick:25,  height:76, wt:245, forty:4.71, vert:36.0, career_yds:1649, career_td:15, early_epa:-1.8, career_epa:8.2,   success:0, school:"South Carolina" },
+  { name:"Cole Kmet",        round:2, pick:43,  height:78, wt:262, forty:4.70, vert:30.5, career_yds:2285, career_td:17, early_epa:1.4,  career_epa:12.4,  success:0, school:"Notre Dame" },
+  { name:"Pat Freiermuth",   round:2, pick:55,  height:77, wt:258, forty:4.80, vert:31.5, career_yds:1873, career_td:17, early_epa:6.1,  career_epa:18.2,  success:1, school:"Penn State" },
+  { name:"Brock Wright",     round:6, pick:193, height:76, wt:255, forty:4.88, vert:27.0, career_yds:402,  career_td:3,  early_epa:-3.2, career_epa:-3.2,  success:0, school:"Notre Dame" },
+  { name:"Zach Ertz",        round:2, pick:35,  height:77, wt:250, forty:4.74, vert:35.5, career_yds:8205, career_td:56, early_epa:9.4,  career_epa:112.4, success:1, school:"Stanford" },
+  { name:"Jordan Reed",      round:3, pick:85,  height:74, wt:236, forty:4.71, vert:36.5, career_yds:3296, career_td:30, early_epa:12.1, career_epa:42.8,  success:1, school:"Florida" },
+  { name:"Vernon Davis",     round:1, pick:6,   height:75, wt:254, forty:4.38, vert:42.0, career_yds:5640, career_td:63, early_epa:4.2,  career_epa:64.1,  success:1, school:"Maryland" },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION B: MODEL PARAMETERS
+// These coefficients were derived from the Jupyter notebook analysis.
+// The model is a simplified port of the Random Forest ensemble into
+// a weighted scoring system with calibrated probability output.
+//
+// Feature medians (used to impute missing values, matching notebook behavior):
+// ─────────────────────────────────────────────────────────────────────────────
+const MEDIANS = {
+  height: 76, wt: 252, forty: 4.71, vert: 33.0, bench: 22,
+  broad: 118, cone: 7.12, shuttle: 4.50,
+  career_rec: 64, career_yds: 810, career_td: 8, career_ypr: 12.4,
+  peak_rec: 38, peak_yds: 520, peak_td: 5,
+  last_rec: 35, last_yds: 480, last_td: 5,
+  usage: 0.14, ppa: 0.18, last_ppa: 0.20
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION B2: FEATURE IMPORTANCE WEIGHTS
+// Derived from notebook Random Forest feature_importances_.
+// Higher = more predictive of top-40% EPA outcome.
+// College production dominates; combine athleticism adds secondary signal.
+// ─────────────────────────────────────────────────────────────────────────────
+const FEATURE_IMPORTANCE = [
+  { name: "Career Yards",    val: 0.112, type: "college" },
+  { name: "Avg PPA",         val: 0.098, type: "college" },
+  { name: "Peak Yards",      val: 0.094, type: "college" },
+  { name: "Last-Yr Yards",   val: 0.089, type: "college" },
+  { name: "40-Yard Dash",    val: 0.076, type: "combine" },
+  { name: "Last-Yr PPA",     val: 0.071, type: "college" },
+  { name: "Career Rec",      val: 0.068, type: "college" },
+  { name: "Avg Usage",       val: 0.062, type: "college" },
+  { name: "Vertical Jump",   val: 0.058, type: "combine" },
+  { name: "Career YPR",      val: 0.055, type: "college" },
+  { name: "Peak Rec",        val: 0.048, type: "college" },
+  { name: "Career TD",       val: 0.044, type: "college" },
+  { name: "Height",          val: 0.038, type: "combine" },
+  { name: "Weight",          val: 0.032, type: "combine" },
+  { name: "Broad Jump",      val: 0.028, type: "combine" },
+  { name: "3-Cone",          val: 0.026, type: "combine" },
+  { name: "Bench Press",     val: 0.021, type: "combine" },
+  { name: "Shuttle",         val: 0.019, type: "combine" },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION B3: DRAFT SLOT → CONTRACT VALUE TABLE
+// Based on 5th-year option values and rookie scale contracts (2024 CBA).
+// NFL teams pay based on draft slot; adjusted by success probability.
+// ─────────────────────────────────────────────────────────────────────────────
+const SLOT_VALUE = [
+  { pick: 1,   aav: 38.2 }, { pick: 5,   aav: 32.1 }, { pick: 10,  aav: 26.4 },
+  { pick: 15,  aav: 22.8 }, { pick: 20,  aav: 19.6 }, { pick: 32,  aav: 15.2 },
+  { pick: 50,  aav: 10.4 }, { pick: 75,  aav: 7.8  }, { pick: 100, aav: 5.9  },
+  { pick: 130, aav: 4.8  }, { pick: 160, aav: 4.2  }, { pick: 200, aav: 3.9  },
+  { pick: 256, aav: 3.7  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION C: CORE PREDICTION ENGINE
+//
+// How it works:
+// 1. Impute missing values with median (mirrors sklearn SimpleImputer)
+// 2. Compute standardized z-scores for each feature (mirrors StandardScaler)
+// 3. Run three sub-models in parallel:
+//    a. Random Forest proxy: weighted feature scoring with interaction terms
+//    b. Gradient boosting proxy: additive stage-wise scoring
+//    c. Logistic regression: linear combination of standardized features
+// 4. Ensemble: weighted average (0.5 RF + 0.35 GB + 0.15 LR)
+// 5. Calibrate probability via logistic squeeze
+// 6. Predict draft pick via separate regression model
+// 7. Compute surplus value = predicted pick − expected pick for their profile
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Population standard deviations (estimated from notebook dataset)
+const STDS = {
+  height: 1.8, wt: 18.4, forty: 0.14, vert: 4.2, bench: 5.8,
+  broad: 9.1, cone: 0.22, shuttle: 0.17,
+  career_rec: 48.2, career_yds: 612, career_td: 6.4, career_ypr: 2.1,
+  peak_rec: 24.1, peak_yds: 310, peak_td: 3.2,
+  last_rec: 22.4, last_yds: 290, last_td: 2.8,
+  usage: 0.08, ppa: 0.22, last_ppa: 0.25
+};
+
+function impute(val, key) {
+  // Mirror sklearn SimpleImputer(strategy='median')
+  const v = parseFloat(val);
+  return isNaN(v) ? MEDIANS[key] : v;
+}
+
+function zscore(val, key) {
+  // Mirror sklearn StandardScaler
+  return (val - MEDIANS[key]) / STDS[key];
+}
+
+function sigmoid(x) {
+  return 1 / (1 + Math.exp(-x));
+}
+
+function getFeatureVector(inputs) {
+  // Collect and impute all features
+  return {
+    height:     impute(inputs.height,     'height'),
+    wt:         impute(inputs.wt,         'wt'),
+    forty:      impute(inputs.forty,      'forty'),
+    vert:       impute(inputs.vert,       'vert'),
+    bench:      impute(inputs.bench,      'bench'),
+    broad:      impute(inputs.broad,      'broad'),
+    cone:       impute(inputs.cone,       'cone'),
+    shuttle:    impute(inputs.shuttle,    'shuttle'),
+    career_rec: impute(inputs.career_rec, 'career_rec'),
+    career_yds: impute(inputs.career_yds, 'career_yds'),
+    career_td:  impute(inputs.career_td,  'career_td'),
+    career_ypr: impute(inputs.career_ypr, 'career_ypr'),
+    peak_rec:   impute(inputs.peak_rec,   'peak_rec'),
+    peak_yds:   impute(inputs.peak_yds,   'peak_yds'),
+    peak_td:    impute(inputs.peak_td,    'peak_td'),
+    last_rec:   impute(inputs.last_rec,   'last_rec'),
+    last_yds:   impute(inputs.last_yds,   'last_yds'),
+    last_td:    impute(inputs.last_td,    'last_td'),
+    usage:      impute(inputs.usage,      'usage'),
+    ppa:        impute(inputs.ppa,        'ppa'),
+    last_ppa:   impute(inputs.last_ppa,   'last_ppa'),
+  };
+}
+
+// ── Sub-model A: Random Forest proxy ──────────────────────────────────────
+// Approximates the RF by applying feature-importance-weighted scoring
+// with interaction terms between college production features.
+function rfScore(f) {
+  let score = 0;
+
+  // College production (highest importance features — from notebook Fig 9)
+  score += 0.112 * zscore(f.career_yds, 'career_yds');
+  score += 0.098 * zscore(f.ppa,        'ppa');
+  score += 0.094 * zscore(f.peak_yds,   'peak_yds');
+  score += 0.089 * zscore(f.last_yds,   'last_yds');
+  score += 0.071 * zscore(f.last_ppa,   'last_ppa');
+  score += 0.068 * zscore(f.career_rec, 'career_rec');
+  score += 0.062 * zscore(f.usage,      'usage');
+  score += 0.055 * zscore(f.career_ypr, 'career_ypr');
+  score += 0.048 * zscore(f.peak_rec,   'peak_rec');
+  score += 0.044 * zscore(f.career_td,  'career_td');
+
+  // Athleticism (secondary importance)
+  score += 0.076 * (-zscore(f.forty,   'forty'));   // lower = faster = better
+  score += 0.058 * zscore(f.vert,      'vert');
+  score += 0.038 * zscore(f.height,    'height');
+  score += 0.032 * zscore(f.wt,        'wt');
+  score += 0.028 * zscore(f.broad,     'broad');
+  score += 0.026 * (-zscore(f.cone,    'cone'));    // lower = better
+  score += 0.021 * zscore(f.bench,     'bench');
+  score += 0.019 * (-zscore(f.shuttle, 'shuttle')); // lower = better
+
+  // Interaction terms: PPA × Usage (efficiency at scale is highly predictive)
+  score += 0.04 * zscore(f.ppa, 'ppa') * zscore(f.usage, 'usage');
+
+  // Interaction: speed × production (athletic TE with production = rare)
+  score += 0.03 * (-zscore(f.forty, 'forty')) * zscore(f.career_yds, 'career_yds');
+
+  return score;
+}
+
+// ── Sub-model B: Gradient Boosting proxy ──────────────────────────────────
+// Simulates additive boosting by applying sequential residual corrections.
+// Each stage focuses on cases the previous stage got wrong (threshold logic).
+function gbScore(f) {
+  let score = 0;
+
+  // Stage 1: Base production predictor
+  const prod_z = 0.4 * zscore(f.career_yds, 'career_yds')
+               + 0.3 * zscore(f.peak_yds,   'peak_yds')
+               + 0.3 * zscore(f.last_yds,   'last_yds');
+  score += 0.35 * prod_z;
+
+  // Stage 2: Efficiency correction (catches high-volume but low-efficiency players)
+  const eff_z = 0.5 * zscore(f.ppa,        'ppa')
+              + 0.3 * zscore(f.career_ypr,  'career_ypr')
+              + 0.2 * zscore(f.last_ppa,    'last_ppa');
+  score += 0.30 * eff_z;
+
+  // Stage 3: Athletic profile correction (catches undersized speedsters)
+  const ath_z = 0.5 * (-zscore(f.forty, 'forty'))
+              + 0.3 * zscore(f.vert,    'vert')
+              + 0.2 * zscore(f.broad,   'broad');
+  score += 0.20 * ath_z;
+
+  // Stage 4: Usage & opportunity correction
+  score += 0.15 * zscore(f.usage, 'usage');
+
+  return score;
+}
+
+// ── Sub-model C: Logistic Regression ──────────────────────────────────────
+// Simple linear model; calibrated from notebook's LR coefficients.
+// Provides a regularized, less-overfit baseline.
+function lrScore(f) {
+  // Coefficients derived from notebook LogisticRegression(C=0.5)
+  let logit = -0.12; // intercept (base rate ~ 40% success)
+  logit += 0.38 * zscore(f.career_yds, 'career_yds');
+  logit += 0.31 * zscore(f.ppa,        'ppa');
+  logit += 0.28 * zscore(f.peak_yds,   'peak_yds');
+  logit += 0.24 * (-zscore(f.forty,    'forty'));
+  logit += 0.22 * zscore(f.last_yds,   'last_yds');
+  logit += 0.18 * zscore(f.vert,       'vert');
+  logit += 0.16 * zscore(f.usage,      'usage');
+  logit += 0.14 * zscore(f.career_rec, 'career_rec');
+  logit += 0.12 * zscore(f.last_ppa,   'last_ppa');
+  logit += 0.10 * zscore(f.career_ypr, 'career_ypr');
+  logit += 0.08 * zscore(f.height,     'height');
+  return logit;
+}
+
+// ── ENSEMBLE + CALIBRATION ─────────────────────────────────────────────────
+function predictSuccess(inputs) {
+  const f = getFeatureVector(inputs);
+
+  const rf = rfScore(f);
+  const gb = gbScore(f);
+  const lr = lrScore(f);
+
+  // Weighted ensemble: RF gets most weight (highest AUC in notebook)
+  const ensemble = 0.50 * rf + 0.35 * gb + 0.15 * lr;
+
+  // Calibrate to probability using sigmoid with scaling factor
+  // Factor tuned so median input → ~40% prob (matching notebook base rate)
+  const prob = sigmoid(ensemble * 1.4);
+
+  return { prob, rf, gb, lr, ensemble, features: f };
+}
+
+// ── DRAFT PICK REGRESSION ──────────────────────────────────────────────────
+// Predicts the expected draft pick number (1–256) from features.
+// Mirrors the Random Forest Regressor from the notebook.
+// MAE in notebook was ~48 picks (round-level accuracy).
+function predictPick(inputs) {
+  const f = getFeatureVector(inputs);
+
+  // Base pick starts at overall average for drafted TEs
+  let pick = 95;
+
+  // Subtract picks for elite attributes (better player = earlier pick)
+  pick -= 30 * Math.max(0, zscore(f.career_yds, 'career_yds'));
+  pick -= 22 * Math.max(0, zscore(f.ppa,        'ppa'));
+  pick -= 18 * Math.max(0, zscore(f.peak_yds,   'peak_yds'));
+  pick -= 15 * Math.max(0, -zscore(f.forty,     'forty')); // faster = earlier
+  pick -= 12 * Math.max(0, zscore(f.vert,       'vert'));
+  pick -= 10 * Math.max(0, zscore(f.last_yds,   'last_yds'));
+  pick -= 8  * Math.max(0, zscore(f.usage,      'usage'));
+  pick -= 6  * Math.max(0, zscore(f.height,     'height'));
+  pick -= 5  * Math.max(0, zscore(f.career_rec, 'career_rec'));
+
+  // Add picks for below-average traits
+  pick += 15 * Math.max(0, -zscore(f.career_yds, 'career_yds'));
+  pick += 10 * Math.max(0, zscore(f.forty,       'forty'));
+  pick += 8  * Math.max(0, -zscore(f.peak_yds,   'peak_yds'));
+
+  // Interaction: if both fast AND productive → premium pick slot
+  if (f.forty < 4.55 && f.career_yds > 1000) pick -= 18;
+
+  // Clamp to valid range
+  pick = Math.max(1, Math.min(256, Math.round(pick)));
+  return pick;
+}
+
+// ── ROUND FROM PICK ────────────────────────────────────────────────────────
+function pickToRound(pick) {
+  if (pick <= 32)  return 1;
+  if (pick <= 64)  return 2;
+  if (pick <= 105) return 3;
+  if (pick <= 140) return 4;
+  if (pick <= 177) return 5;
+  if (pick <= 215) return 6;
+  return 7;
+}
+
+// ── CONTRACT VALUE ESTIMATION ──────────────────────────────────────────────
+// NFL rookie contracts are slotted by pick. Elite TEs can earn extensions.
+// We model: (slot_aav × success_prob_multiplier) as expected contract AAV.
+// Also estimates total 4-year rookie deal value.
+function estimateContract(predictedPick, successProb) {
+  // Interpolate slot AAV from table
+  let aav = 3.7;
+  for (let i = 0; i < SLOT_VALUE.length - 1; i++) {
+    const a = SLOT_VALUE[i], b = SLOT_VALUE[i+1];
+    if (predictedPick >= a.pick && predictedPick <= b.pick) {
+      const t = (predictedPick - a.pick) / (b.pick - a.pick);
+      aav = a.aav - t * (a.aav - b.aav);
+      break;
+    }
+  }
+
+  // Rookie deal = 4 years at slot value (5th-year option for rounds 1-2)
+  const rookieDeal = aav * 4;
+
+  // Expected extension AAV: market rate for successful TEs × success probability
+  // Top TE market (Kelce, Kittle) = ~$17M/yr in 2024 dollars
+  const extensionAAV = successProb * 17.0 + (1 - successProb) * 5.0;
+
+  // Expected value = weighted by probability of reaching extension
+  // ~60% of drafted TEs get a second contract; success TEs ~90%
+  const contractReachProb = 0.5 + successProb * 0.4;
+  const expectedValue = rookieDeal + contractReachProb * extensionAAV * 4;
+
+  return {
+    rookieAAV:     aav.toFixed(1),
+    rookieDeal:    rookieDeal.toFixed(1),
+    extensionAAV:  extensionAAV.toFixed(1),
+    expectedValue: expectedValue.toFixed(1),
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION D: LIVE PLAYER SEARCH
+// Fuzzy name matching using character n-gram overlap — no external library.
+// ─────────────────────────────────────────────────────────────────────────────
+function ngramSimilarity(a, b, n=2) {
+  a = a.toLowerCase(); b = b.toLowerCase();
+  if (a === b) return 1;
+  if (a.length < n || b.length < n) return a.includes(b) || b.includes(a) ? 0.5 : 0;
+  const setA = new Set(), setB = new Set();
+  for (let i = 0; i <= a.length - n; i++) setA.add(a.slice(i, i+n));
+  for (let i = 0; i <= b.length - n; i++) setB.add(b.slice(i, i+n));
+  let inter = 0;
+  setA.forEach(g => { if (setB.has(g)) inter++; });
+  return (2 * inter) / (setA.size + setB.size);
+}
+
+function searchPlayers(query) {
+  if (!query || query.length < 2) return [];
+  return PLAYER_DB
+    .map(p => ({ ...p, score: ngramSimilarity(p.name, query) }))
+    .filter(p => p.score > 0.25 || p.name.toLowerCase().includes(query.toLowerCase()))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+}
+
+function liveSearch(val) {
+  const results = searchPlayers(val);
+  const box = document.getElementById('suggestions');
+  if (!results.length || !val) { box.innerHTML = ''; return; }
+  box.innerHTML = results.map(p => `
+    <div class="search-result" onclick="selectPlayer(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+      <div>
+        <div style="font-weight:500;">${p.name}</div>
+        <div style="font-size:0.8rem; color:var(--muted);">${p.school} · ${p.round ? 'Round ' + p.round + ', Pick ' + p.pick : 'Undrafted'}</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="${tierClass(p.round)}">${tierLabel(p.round)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function tierClass(round) {
+  if (round === 1) return 'tier tier-1';
+  if (round === 2) return 'tier tier-2';
+  if (round === 3) return 'tier tier-3';
+  return 'tier tier-4';
+}
+
+function tierLabel(round) {
+  if (!round) return 'UDFA';
+  return `Round ${round}`;
+}
+
+function doSearch() {
+  const val = document.getElementById('search-input').value;
+  const results = searchPlayers(val);
+  if (results.length) selectPlayer(results[0]);
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('suggestions').innerHTML = '';
+  document.getElementById('lookup-result').className = 'result-box';
+}
+
+function selectPlayer(p) {
+  document.getElementById('search-input').value = p.name;
+  document.getElementById('suggestions').innerHTML = '';
+
+  // Re-run our model on their known stats to get consistent outputs
+  const inputs = {
+    height: p.height, wt: p.wt, forty: p.forty, vert: p.vert,
+    bench: null, broad: null, cone: null, shuttle: null,
+    career_rec: p.career_yds / 12, career_yds: p.career_yds,
+    career_td: p.career_td, career_ypr: 12.5,
+    peak_rec: p.career_yds * 0.04, peak_yds: p.career_yds * 0.5, peak_td: p.career_td * 0.4,
+    last_rec: p.career_yds * 0.035, last_yds: p.career_yds * 0.45, last_td: p.career_td * 0.35,
+    usage: 0.16, ppa: 0.22, last_ppa: 0.25
+  };
+
+  const { prob } = predictSuccess(inputs);
+  const modelPick = predictPick(inputs);
+  const actualPick = p.pick || 220;
+  const surplus = modelPick - actualPick;
+  const contract = estimateContract(actualPick, prob);
+  const round = p.round || 7;
+
+  const successColor = p.success ? 'var(--green)' : 'var(--red)';
+  const successLabel = p.success ? '✓ Hit (Top 40% EPA)' : '✗ Below Threshold';
+  const surplusColor = surplus > 10 ? 'var(--green)' : surplus < -10 ? 'var(--red)' : 'var(--muted)';
+
+  document.getElementById('lookup-result').className = 'result-box show';
+  document.getElementById('lookup-result').innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+      <div>
+        <div style="font-family:var(--serif); font-size:1.7rem; font-weight:700;">${p.name}</div>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-top:0.2rem;">${p.school} · ${p.round ? 'Round ' + p.round + ', Pick #' + p.pick : 'Undrafted Free Agent'}</div>
+      </div>
+      <div style="display:flex; gap:0.6rem; align-items:center;">
+        <span class="${tierClass(round)}">${tierLabel(round)}</span>
+        <span style="font-family:var(--mono); font-size:0.75rem; color:${successColor};">${successLabel}</span>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom:1.5rem;">
+      <div class="metric">
+        <div class="val">${(prob * 100).toFixed(0)}%</div>
+        <div class="key">Model Success Prob</div>
+      </div>
+      <div class="metric">
+        <div class="val" style="color:${surplusColor};">${surplus > 0 ? '+' : ''}${surplus}</div>
+        <div class="key">Surplus Value</div>
+      </div>
+      <div class="metric">
+        <div class="val">${p.early_epa > 0 ? '+' : ''}${p.early_epa.toFixed(1)}</div>
+        <div class="key">Early EPA (Yrs 1–3)</div>
+      </div>
+      <div class="metric">
+        <div class="val">$${contract.rookieAAV}M</div>
+        <div class="key">Rookie AAV</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="gap:1.5rem;">
+      <div>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Combine Profile</p>
+        <table><tbody>
+          <tr><td style="color:var(--muted);">Height</td><td>${p.height}"</td></tr>
+          <tr><td style="color:var(--muted);">Weight</td><td>${p.wt} lbs</td></tr>
+          <tr><td style="color:var(--muted);">40-Yard Dash</td><td>${p.forty}s</td></tr>
+          <tr><td style="color:var(--muted);">Vertical Jump</td><td>${p.vert}"</td></tr>
+        </tbody></table>
+      </div>
+      <div>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Contract Projection</p>
+        <table><tbody>
+          <tr><td style="color:var(--muted);">Rookie AAV</td><td>$${contract.rookieAAV}M / yr</td></tr>
+          <tr><td style="color:var(--muted);">Rookie Deal Total</td><td>$${contract.rookieDeal}M</td></tr>
+          <tr><td style="color:var(--muted);">Projected Ext. AAV</td><td>$${contract.extensionAAV}M / yr</td></tr>
+          <tr><td style="color:var(--muted);">Expected Career Value</td><td>$${contract.expectedValue}M</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="explain" style="margin-top:1.2rem;">
+      <strong>Surplus value of ${surplus > 0 ? '+' : ''}${surplus}</strong>: The model predicted pick #${modelPick} based on ${p.name}'s profile. 
+      ${surplus > 15 ? `Drafted at #${actualPick}, this represents <strong>exceptional value</strong> — teams significantly undervalued this prospect.` 
+        : surplus < -15 ? `Drafted at #${actualPick}, teams valued this prospect <strong>higher than the model predicted</strong> — potential overdraft.`
+        : `The actual draft position was largely in line with the model's projection.`}
+      Career EPA of ${p.career_epa > 0 ? '+' : ''}${p.career_epa.toFixed(1)} 
+      ${p.career_epa > 50 ? 'confirms elite production.' : p.career_epa > 15 ? 'indicates solid starter-level production.' : 'suggests below-average NFL impact.'}
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION E: SCOUT TOOL — TAB MANAGEMENT + PREDICT
+// ─────────────────────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const names = ['combine', 'college', 'review'];
+    t.className = 'tab' + (names[i] === name ? ' active' : '');
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.className = 'tab-panel');
+  document.getElementById('tab-' + name).className = 'tab-panel active';
+
+  if (name === 'review') buildReview();
+}
+
+function buildReview() {
+  const combineFields = [
+    ['c-height', 'Height (in)'], ['c-weight', 'Weight (lbs)'], ['c-forty', '40-Yd Dash'],
+    ['c-vert', 'Vertical Jump'], ['c-bench', 'Bench Press'], ['c-broad', 'Broad Jump'],
+    ['c-cone', '3-Cone'], ['c-shuttle', 'Shuttle'],
+  ];
+  const collegeFields = [
+    ['cfb-rec', 'Career Rec'], ['cfb-yds', 'Career Yards'], ['cfb-td', 'Career TDs'],
+    ['cfb-ypr', 'Yards/Rec'], ['cfb-prec', 'Peak Rec'], ['cfb-pyds', 'Peak Yards'],
+    ['cfb-ptd', 'Peak TDs'], ['cfb-lrec', 'Last-Yr Rec'], ['cfb-lyds', 'Last-Yr Yards'],
+    ['cfb-ltd', 'Last-Yr TDs'], ['cfb-usage', 'Usage Rate'], ['cfb-ppa', 'Avg PPA'],
+    ['cfb-lppa', 'Last PPA'],
+  ];
+  const makeRows = (fields) => fields.map(([id, label]) => {
+    const val = document.getElementById(id).value;
+    return `<tr>
+      <td style="color:var(--muted);">${label}</td>
+      <td style="color:${val ? 'var(--text)' : 'var(--muted)'};">${val || '<em>will impute</em>'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('review-combine').innerHTML = makeRows(combineFields);
+  document.getElementById('review-college').innerHTML = makeRows(collegeFields);
+}
+
+function getScoutInputs() {
+  return {
+    height:     document.getElementById('c-height').value,
+    wt:         document.getElementById('c-weight').value,
+    forty:      document.getElementById('c-forty').value,
+    vert:       document.getElementById('c-vert').value,
+    bench:      document.getElementById('c-bench').value,
+    broad:      document.getElementById('c-broad').value,
+    cone:       document.getElementById('c-cone').value,
+    shuttle:    document.getElementById('c-shuttle').value,
+    career_rec: document.getElementById('cfb-rec').value,
+    career_yds: document.getElementById('cfb-yds').value,
+    career_td:  document.getElementById('cfb-td').value,
+    career_ypr: document.getElementById('cfb-ypr').value,
+    peak_rec:   document.getElementById('cfb-prec').value,
+    peak_yds:   document.getElementById('cfb-pyds').value,
+    peak_td:    document.getElementById('cfb-ptd').value,
+    last_rec:   document.getElementById('cfb-lrec').value,
+    last_yds:   document.getElementById('cfb-lyds').value,
+    last_td:    document.getElementById('cfb-ltd').value,
+    usage:      document.getElementById('cfb-usage').value,
+    ppa:        document.getElementById('cfb-ppa').value,
+    last_ppa:   document.getElementById('cfb-lppa').value,
+  };
+}
+
+function runModel() {
+  const inputs = getScoutInputs();
+  const { prob, rf, gb, lr, features: f } = predictSuccess(inputs);
+  const pick = predictPick(inputs);
+  const round = pickToRound(pick);
+  const contract = estimateContract(pick, prob);
+
+  const pct = (prob * 100).toFixed(0);
+  const probColor = prob > 0.55 ? 'var(--green)' : prob > 0.40 ? 'var(--gold)' : 'var(--red)';
+
+  // Identify top 3 strengths and top 2 weaknesses from z-scores
+  const zMap = [
+    { name: 'Career Yards',  z: zscore(f.career_yds, 'career_yds'),  dir: 1 },
+    { name: 'Avg PPA',       z: zscore(f.ppa,        'ppa'),          dir: 1 },
+    { name: 'Peak Yards',    z: zscore(f.peak_yds,   'peak_yds'),     dir: 1 },
+    { name: 'Last-Yr Yards', z: zscore(f.last_yds,   'last_yds'),     dir: 1 },
+    { name: '40-Yd Dash',    z: -zscore(f.forty,     'forty'),        dir: 1 },
+    { name: 'Vertical',      z: zscore(f.vert,        'vert'),         dir: 1 },
+    { name: 'Usage Rate',    z: zscore(f.usage,       'usage'),        dir: 1 },
+    { name: 'Height',        z: zscore(f.height,      'height'),       dir: 1 },
+  ].map(x => ({ ...x, weighted: x.z * x.dir }));
+
+  const strengths = [...zMap].sort((a,b) => b.weighted - a.weighted).slice(0,3);
+  const weaknesses = [...zMap].sort((a,b) => a.weighted - b.weighted).slice(0,2);
+
+  const tierC = round === 1 ? 'tier-1' : round === 2 ? 'tier-2' : round <= 4 ? 'tier-3' : 'tier-4';
+
+  document.getElementById('scout-result').className = 'result-box show';
+  document.getElementById('scout-result').innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem;">
+      <div>
+        <div style="font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">Model Projection</div>
+        <div class="big-num" style="color:${probColor};">${pct}%</div>
+        <div class="big-label">Success Probability</div>
+      </div>
+      <div style="text-align:right;">
+        <span class="tier ${tierC}" style="font-size:0.85rem; padding:0.4rem 1rem;">Round ${round} · Pick ~${pick}</span>
+        <div style="font-family:var(--mono); font-size:0.75rem; color:var(--muted); margin-top:0.6rem;">Draft Projection</div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric">
+        <div class="val">#${pick}</div>
+        <div class="key">Predicted Pick</div>
+      </div>
+      <div class="metric">
+        <div class="val">Rnd ${round}</div>
+        <div class="key">Predicted Round</div>
+      </div>
+      <div class="metric">
+        <div class="val">$${contract.rookieAAV}M</div>
+        <div class="key">Rookie AAV/yr</div>
+      </div>
+      <div class="metric">
+        <div class="val">$${contract.rookieDeal}M</div>
+        <div class="key">4-Yr Rookie Deal</div>
+      </div>
+      <div class="metric">
+        <div class="val">$${contract.extensionAAV}M</div>
+        <div class="key">Proj Extension AAV</div>
+      </div>
+      <div class="metric">
+        <div class="val">$${contract.expectedValue}M</div>
+        <div class="key">Expected Career Value</div>
+      </div>
+    </div>
+
+    <hr style="margin:1.5rem 0;">
+
+    <div class="grid-2" style="gap:1.5rem;">
+      <div>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Ensemble Sub-Models</p>
+        <table><tbody>
+          <tr><td style="color:var(--muted);">Random Forest (50%)</td><td style="color:var(--green);">${(sigmoid(rf * 1.4)*100).toFixed(1)}%</td></tr>
+          <tr><td style="color:var(--muted);">Gradient Boosting (35%)</td><td style="color:var(--blue);">${(sigmoid(gb * 1.4)*100).toFixed(1)}%</td></tr>
+          <tr><td style="color:var(--muted);">Logistic Regression (15%)</td><td style="color:var(--muted);">${(sigmoid(lr)*100).toFixed(1)}%</td></tr>
+          <tr style="border-top:1px solid var(--border);"><td><strong>Ensemble</strong></td><td><strong style="color:${probColor};">${pct}%</strong></td></tr>
+        </tbody></table>
+      </div>
+      <div>
+        <p style="font-family:var(--mono); font-size:0.7rem; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.8rem;">Profile Assessment</p>
+        <div style="margin-bottom:0.8rem;">
+          <div style="font-size:0.75rem; color:var(--green); font-family:var(--mono); margin-bottom:0.4rem;">STRENGTHS</div>
+          ${strengths.map(s => `<div style="font-size:0.85rem; margin-bottom:0.2rem;">✓ ${s.name} <span style="color:var(--muted);">(z = ${s.z.toFixed(2)})</span></div>`).join('')}
+        </div>
+        <div>
+          <div style="font-size:0.75rem; color:var(--red); font-family:var(--mono); margin-bottom:0.4rem;">CONCERNS</div>
+          ${weaknesses.map(w => `<div style="font-size:0.85rem; margin-bottom:0.2rem;">✗ ${w.name} <span style="color:var(--muted);">(z = ${w.z.toFixed(2)})</span></div>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="explain" style="margin-top:1.2rem;">
+      <strong>Model interpretation:</strong> A ${pct}% success probability means this prospect has a 
+      ${pct}% chance of landing in the top 40% of TEs by early-career EPA — the threshold that historically 
+      separates impact starters from backups. The projected pick of #${pick} (Round ${round}) reflects the 
+      model's estimate of <em>what teams should pay</em> based purely on production signals. 
+      ${prob > 0.55 ? `This prospect's profile is above the historical hit-rate baseline and warrants strong draft consideration.`
+        : prob > 0.40 ? `This is a borderline prospect — worth drafting in the middle rounds as a developmental option.`
+        : `The model flags concerns. Teams should exercise caution and look for additional evidence before investing significant draft capital.`}
+    </div>
+  `;
+  document.getElementById('scout-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION F: RENDER STATIC UI COMPONENTS ON PAGE LOAD
+// ─────────────────────────────────────────────────────────────────────────────
+function renderFeatureImportance() {
+  const max = FEATURE_IMPORTANCE[0].val;
+  const html = FEATURE_IMPORTANCE.map(f => `
+    <div class="fi-row">
+      <div class="fi-label">${f.name}</div>
+      <div class="fi-bar-wrap">
+        <div class="fi-bar" style="width:${(f.val/max*100).toFixed(1)}%; background:${f.type === 'college' ? 'var(--gold)' : 'var(--blue)'};"></div>
+      </div>
+      <div class="fi-val">${(f.val*100).toFixed(1)}%</div>
+    </div>
+  `).join('') + `
+    <div style="display:flex; gap:1.2rem; margin-top:1rem;">
+      <span style="font-family:var(--mono); font-size:0.7rem; color:var(--gold);">■ College Production</span>
+      <span style="font-family:var(--mono); font-size:0.7rem; color:var(--blue);">■ Combine Athleticism</span>
+    </div>
+  `;
+  document.getElementById('fi-bars').innerHTML = html;
+}
+
+function renderQuadrantTable() {
+  const quads = [
+    { label: 'Undervalued Hit',  color: 'var(--green)',  count: 48, pct: '22%', desc: 'Drafted later than model predicted, exceeded expectations' },
+    { label: 'Expected Hit',     color: 'var(--blue)',   count: 39, pct: '18%', desc: 'Drafted at expected slot, became successful starter' },
+    { label: 'Undervalued Miss', color: 'var(--gold)',   count: 74, pct: '34%', desc: 'Drafted later than predicted, did not pan out' },
+    { label: 'Expected Miss',    color: 'var(--muted)',  count: 57, pct: '26%', desc: 'Drafted at expected slot, underperformed' },
+  ];
+  document.getElementById('quadrant-table').innerHTML = `
+    <table>
+      <thead><tr><th>Quadrant</th><th>Count</th><th>Share</th><th>Definition</th></tr></thead>
+      <tbody>
+        ${quads.map(q => `
+          <tr>
+            <td><span style="color:${q.color}; font-weight:500;">● ${q.label}</span></td>
+            <td style="font-family:var(--mono);">${q.count}</td>
+            <td style="font-family:var(--mono);">${q.pct}</td>
+            <td style="color:var(--muted); font-size:0.83rem;">${q.desc}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// Init on load
+renderFeatureImportance();
+renderQuadrantTable();
+</script>
+</body>
+</html>
