@@ -48,8 +48,8 @@ Any push to the `main` branch automatically updates the live site.
 
 ## Team
 
-Add your team members here.
+Prayag Peram
+Jai Karthikeyan 
+Kavin Nainar
 
-## License
 
-MIT
