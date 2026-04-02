@@ -1726,6 +1726,7 @@
     val: parseFloat(f.val) || 0,
     type: f.type || "combine",
   }))
+  .filter(f => f.name !== "Draft Pick #")
   .sort((a, b) => b.val - a.val)
   .slice(0, 20);
 
