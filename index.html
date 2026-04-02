@@ -1705,9 +1705,9 @@
         showLoader(true);
         try {
           const [playersRes, prospectsRes, modelRes] = await Promise.all([
-            fetch(`${API_BASE}/api/players`),
-            fetch(`${API_BASE}/api/prospects`),
-            fetch(`${API_BASE}/api/model_info`),
+            fetch("results/players.json"),
+            fetch("results/prospects.json"),
+            fetch("results/model_info.json"),
           ]);
 
           if (!playersRes.ok || !prospectsRes.ok || !modelRes.ok) {
