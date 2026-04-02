@@ -1,0 +1,126 @@
+{
+  "model_metrics": {
+    "cv_auc_mean": 0.7758,
+    "cv_auc_std": 0.0296,
+    "cv_acc_mean": 0.7422,
+    "cv_acc_std": 0.0204
+  },
+  "feature_importance": [
+    {
+      "name": "Draft Pick #",
+      "raw": "pick",
+      "val": 1.41882,
+      "type": "combine"
+    },
+    {
+      "name": "Vertical Jump",
+      "raw": "Vertical",
+      "val": 0.36834,
+      "type": "combine"
+    },
+    {
+      "name": "College Yards / Reception",
+      "raw": "cfb_ypr",
+      "val": 0.20689,
+      "type": "college"
+    },
+    {
+      "name": "Shuttle Time",
+      "raw": "Shuttle",
+      "val": 0.19806,
+      "type": "combine"
+    },
+    {
+      "name": "Weight (lbs)",
+      "raw": "Wt",
+      "val": 0.17361,
+      "type": "combine"
+    },
+    {
+      "name": "40-Yard Dash",
+      "raw": "40yd",
+      "val": 0.17164,
+      "type": "combine"
+    },
+    {
+      "name": "College Overall PPA",
+      "raw": "cfb_ppa_total",
+      "val": 0.16221,
+      "type": "college"
+    },
+    {
+      "name": "College Rec Yds / Season",
+      "raw": "cfb_rec_yds_per_season",
+      "val": 0.15349,
+      "type": "college"
+    },
+    {
+      "name": "College Pass Usage Rate",
+      "raw": "cfb_usage_pass",
+      "val": 0.14878,
+      "type": "college"
+    },
+    {
+      "name": "Broad Jump",
+      "raw": "Broad Jump",
+      "val": 0.13941,
+      "type": "combine"
+    },
+    {
+      "name": "3-Cone Drill",
+      "raw": "3Cone",
+      "val": 0.12133,
+      "type": "combine"
+    },
+    {
+      "name": "Career College Rec Yds",
+      "raw": "cfb_rec_yds",
+      "val": 0.11838,
+      "type": "college"
+    },
+    {
+      "name": "College Pass PPA",
+      "raw": "cfb_ppa_pass",
+      "val": 0.07675,
+      "type": "college"
+    },
+    {
+      "name": "Career College Receptions",
+      "raw": "cfb_rec",
+      "val": 0.0565,
+      "type": "college"
+    },
+    {
+      "name": "College Rec TDs / Season",
+      "raw": "cfb_rec_td_per_season",
+      "val": 0.05062,
+      "type": "college"
+    },
+    {
+      "name": "Height (in)",
+      "raw": "height_in",
+      "val": 0.04032,
+      "type": "combine"
+    },
+    {
+      "name": "Career College Rec TDs",
+      "raw": "cfb_rec_td",
+      "val": 0.01865,
+      "type": "college"
+    },
+    {
+      "name": "Career College Rush Yds",
+      "raw": "cfb_rush_yds",
+      "val": 0.01396,
+      "type": "college"
+    }
+  ],
+  "archetype_names": {
+    "1": "Receiving Weapon",
+    "2": "Athletic Freak",
+    "3": "Inline Blocker",
+    "0": "Move TE / H-Back",
+    "4": "Balanced Starter"
+  },
+  "base_shap_value": -1.2667
+}
