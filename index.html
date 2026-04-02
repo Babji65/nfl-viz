@@ -1720,14 +1720,14 @@
 
           // Build FEATURE_IMPORTANCE from model_info
           const fi = MODEL_INFO.feature_importance || {};
-          FEATURE_IMPORTANCE = Object.entries(fi)
-            .map(([feat, val]) => ({
-              name: featLabel(feat),
-              val: parseFloat(val) || 0,
-              type: feat.startsWith("cfb_") ? "college" : "combine",
-            }))
-            .sort((a, b) => b.val - a.val)
-            .slice(0, 20);
+          FEATURE_IMPORTANCE = fi
+  .map(f => ({
+    name: f.name,
+    val: parseFloat(f.val) || 0,
+    type: f.type || "combine",
+  }))
+  .sort((a, b) => b.val - a.val)
+  .slice(0, 20);
 
           DATA_LOADED = true;
           showLoader(false);
